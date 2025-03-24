@@ -1,28 +1,40 @@
-import React from "react";
-
-//include images into your bundle
+import React, { useState, useEffect } from 'react';
 import rigoImage from "../../img/rigo-baby.jpg";
+import SimpleCounter from "./Contador"; // Asegúrate de la ruta
 
-//create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-            
+  const [counter, setCounter] = useState(0);
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCounter(prev => prev + 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Calcula los dígitos
+  const digits = {
+    digitSix: Math.floor(counter / 100000) % 10,
+    digitFive: Math.floor(counter / 10000) % 10,
+    digitFour: Math.floor(counter / 1000) % 10,
+    digitThree: Math.floor(counter / 100) % 10,
+    digitTwo: Math.floor(counter / 10) % 10,
+    digitOne: counter % 10
+  };
+
+  return (
+    <div className="text-center">
+      <h1 className="mt-5">Contador de Segundos</h1>
+      
+      {/* SOLO UN SimpleCounter aquí */}
+      <SimpleCounter {...digits} />
+      
+      <img src={rigoImage} alt="Rigo" className="img-fluid mt-4" />
+      <p className="mt-4">
+        Made by <a href="http://www.4geeksacademy.com">4Geeks Academy</a>
+      </p>
+    </div>
+  );
 };
 
 export default Home;

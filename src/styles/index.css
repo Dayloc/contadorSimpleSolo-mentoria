@@ -9,3 +9,22 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+.counter-container {
+    font-family: 'Courier New', monospace;
+    
+    .counter-digits {
+      .digit-box {
+        background: #000;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 2rem;
+        min-width: 50px;
+        text-align: center;
+      }
+    }
+    
+    .counter-icon {
+      color: #000;
+    }
+  }
