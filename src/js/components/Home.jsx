@@ -28,7 +28,7 @@ const Home = () => {
     <div className="text-center">
       <h1 className="mt-5">Contador de Segundos</h1>
 
-      <SimpleCounter seconds={60} />
+     {/*  <SimpleCounter seconds={60} /> */}
 
       <img src={rigoImage} alt="Rigo" className="img-fluid mt-4" />
       <p className="mt-4">
