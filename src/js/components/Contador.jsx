@@ -10,12 +10,10 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
   const [alertTime, setAlertTime] = useState(null);
   const [alertShown, setAlertShown] = useState(false);
 
-  // Formatear número a 6 dígitos
   const formatNumber = (num) => {
     return Math.max(0, num).toString().padStart(6, "0");
   };
 
-  // Manejar el temporizador
   useEffect(() => {
     let interval;
 
@@ -24,7 +22,6 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
         setSeconds((prev) => {
           const newSeconds = isCountdown ? prev - 1 : prev + 1;
 
-          // Manejar alerta
           if (alertTime !== null && newSeconds === alertTime && !alertShown) {
             alert(
               `¡Alerta! Se ha alcanzado el tiempo de ${alertTime} segundos`
@@ -32,7 +29,6 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
             setAlertShown(true);
           }
 
-          // Detener cuenta regresiva al llegar a cero
           if (isCountdown && newSeconds <= 0) {
             setIsRunning(false);
             return 0;
@@ -46,7 +42,6 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
     return () => clearInterval(interval);
   }, [isRunning, isCountdown, alertTime, alertShown]);
 
-  // Controlar la cuenta regresiva
   const handleCountdownToggle = () => {
     const newCountdownMode = !isCountdown;
     setIsCountdown(newCountdownMode);
@@ -54,7 +49,6 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
     setAlertShown(false);
   };
 
-  // Reiniciar el contador
   const resetCounter = () => {
     setSeconds(isCountdown ? countdownFrom : 0);
     setIsRunning(false);
@@ -62,75 +56,34 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: "600px",
-        margin: "2rem auto",
-        padding: "2rem",
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        textAlign: "center",
-      }}
-    >
+    <div className="counter-container m-5">
       {/* Display del contador */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: "1.5rem",
-        }}
-      >
-        <FontAwesomeIcon
-          icon={faClock}
-          style={{ fontSize: "2rem", marginRight: "1rem" }}
-        />
-        <span style={{ fontSize: "3rem", fontFamily: "monospace" }}>
-          {formatNumber(seconds)}
-        </span>
+      <div className="counter-display">
+        <FontAwesomeIcon icon={faClock} className="counter-icon" />
+        <span className="counter-number">{formatNumber(seconds)}</span>
       </div>
 
       {/* Controles principales */}
-      <div style={{ marginBottom: "1.5rem" }}>
+      <div className="controls-container">
         <button
           onClick={() => setIsRunning(!isRunning)}
-          style={{
-            padding: "0.5rem 1rem",
-            margin: "0 0.5rem",
-            backgroundColor: isRunning ? "#dc3545" : "#28a745",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
+          className={`btn ${isRunning ? "btn-pause" : "btn-resume"}`}
         >
           {isRunning ? "Pausar" : "Reanudar"}
         </button>
 
-        <button
-          onClick={resetCounter}
-          style={{
-            padding: "0.5rem 1rem",
-            margin: "0 0.5rem",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
+        <button onClick={resetCounter} className="btn btn-reset">
           Reiniciar
         </button>
       </div>
 
       {/* Configuración de cuenta regresiva */}
-      <div style={{ marginBottom: "1.5rem" }}>
-        <label style={{ marginRight: "0.5rem" }}>
+      <div className="countdown-settings">
+        <label className="checkbox-label">
           <input
             type="checkbox"
             checked={isCountdown}
             onChange={handleCountdownToggle}
-            style={{ marginRight: "0.3rem" }}
           />
           Modo cuenta regresiva
         </label>
@@ -141,21 +94,15 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
             value={countdownFrom}
             onChange={(e) => setCountdownFrom(Number(e.target.value))}
             min="0"
-            style={{
-              padding: "0.3rem",
-              width: "80px",
-              marginLeft: "0.5rem",
-              border: "1px solid #ddd",
-              borderRadius: "4px",
-            }}
+            className="countdown-input"
             placeholder="Segundos"
           />
         )}
       </div>
 
       {/* Configuración de alerta */}
-      <div>
-        <label style={{ marginRight: "0.5rem" }}>Alerta en:</label>
+      <div className="alert-settings">
+        <label>Alerta en:</label>
         <input
           type="number"
           value={alertTime || ""}
@@ -164,13 +111,7 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
             setAlertShown(false);
           }}
           min="0"
-          style={{
-            padding: "0.3rem",
-            width: "80px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            marginRight: "0.5rem",
-          }}
+          className="alert-input"
           placeholder="Segundos"
         />
         <span>segundos</span>
