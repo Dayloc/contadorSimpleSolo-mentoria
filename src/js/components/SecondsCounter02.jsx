@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 
-const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
+const SecondsCounter02 = ({ seconds: initialSeconds = 0 }) => {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [isRunning, setIsRunning] = useState(true);
   const [isCountdown, setIsCountdown] = useState(false);
@@ -56,7 +56,7 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
   };
 
   return (
-    <div className="counter-container m-5">
+    <div className="counter-container text-dark m-5 w-100">
       {/* Display del contador */}
       <div className="counter-display">
         <FontAwesomeIcon icon={faClock} className="counter-icon" />
@@ -120,4 +120,4 @@ const SecondsCounter = ({ seconds: initialSeconds = 0 }) => {
   );
 };
 
-export default SecondsCounter;
+export default SecondsCounter02;

@@ -114,3 +114,25 @@
   border-radius: 4px;
   margin: 0 0.5rem;
 }
+.clock {
+  font-size: 2rem; /* ajusta según tamaño */
+  margin-right: 5px; /* pequeño espacio con los dígitos */
+  font-size: 200px;
+}
+
+.largo {
+  display: flex;
+  border-radius: 25px;
+  box-shadow: 0 0 5px rgb(227, 85, 85), 0 0 10px rgb(36, 70, 242);
+}
+
+.digit {
+  text-shadow: 0 0 5px white, 0 0 10px white;
+  padding: 5px;
+  font-size: 200px;
+  border-radius: 25px;
+}
+body {
+  background-color: #333;
+  color: antiquewhite;
+}
